@@ -23,15 +23,15 @@ const ImageCanvas = ({ }) => {
             setImageUrl(path)
         });
     }
-    return (       
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.colorPelletRed} onPress={() => imageManipulate()}></TouchableOpacity>
-                <TouchableOpacity style={styles.colorPelletYellow}></TouchableOpacity>
-                <TouchableOpacity style={styles.colorPelletGreen}></TouchableOpacity>
-                <TouchableOpacity style={styles.colorPelletBlue}></TouchableOpacity>
-                <TouchableOpacity style={styles.colorPelletWhite}></TouchableOpacity>
-                <TouchableOpacity style={styles.colorPelletBlack}></TouchableOpacity>
-            </View>
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity style={styles.colorPelletRed} onPress={() => imageManipulate()}></TouchableOpacity>
+            <TouchableOpacity style={styles.colorPelletYellow}></TouchableOpacity>
+            <TouchableOpacity style={styles.colorPelletGreen}></TouchableOpacity>
+            <TouchableOpacity style={styles.colorPelletBlue}></TouchableOpacity>
+            <TouchableOpacity style={styles.colorPelletWhite}></TouchableOpacity>
+            <TouchableOpacity style={styles.colorPelletBlack}></TouchableOpacity>
+        </View>
     );
 }
 

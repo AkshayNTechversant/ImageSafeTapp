@@ -14,7 +14,7 @@ const HomeScreen = ({ navigation }) => {
 
   const openCamera = () => {
     navigation.navigate('Preview');
-    
+
   };
 
 
@@ -22,13 +22,13 @@ const HomeScreen = ({ navigation }) => {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
-      includeBase64:true
+      includeBase64: true
     }).then(image => {
-     console.log(image);
-     const imagePath = image.data;
-     const source = "data:image/jpeg;base64," + imagePath;
-     setImageUrl(source);
-     
+      console.log(image);
+      const imagePath = image.data;
+      const source = "data:image/jpeg;base64," + imagePath;
+      setImageUrl(source);
+
     });
     navigation.navigate('Preview');
   };
@@ -37,13 +37,13 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.mainContainer}>
       <CustomButton
         title="Open Camera"
-        onPress={() =>openCamera()} />
+        onPress={() => openCamera()} />
       <CustomButton
         title="Open Gallery"
-        onPress={() => navigation.navigate('ImageCanvas')} />
-      <Image
+        onPress={() => openGallery()} />
+      {/* <Image
         style={{ height: 100, width: 100 }}
-        source={{uri:imageUrl}} />
+        source={{uri:imageUrl}} /> */}
     </View>
   );
 };
