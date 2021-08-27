@@ -5,12 +5,13 @@ platform :ios, '11.0'
 
 target 'ImageSafeTApp' do
   config = use_native_modules!
-
+  pod 'react-native-image-crop-tools', :path => '../node_modules/react-native-image-crop-tools'
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => false
   )
+
 
 
   target 'ImageSafeTAppTests' do
