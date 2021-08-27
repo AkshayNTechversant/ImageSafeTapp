@@ -8,6 +8,8 @@ import ImagePicker from 'react-native-image-crop-picker';
 import DrawCanvas from '../components/DrawCanvas';
 import RotateImage from '../components/RotateImage';
 import LocationOnImage from '../components/LocationOnImage';
+import DateOnImage from '../components/DateOnImage';
+import TextOnImage from '../components/TextOnImage';
 
 
 const { width, height } = Dimensions.get('window');
@@ -17,7 +19,9 @@ const PreviewScreen = ({ onOK, route }) => {
 
   const [showDraw, setShowDraw] = useState(false);
   const [showRotate, setShowRotate] = useState(false);
-  const [showLocation,setShowLocation] = useState(false);
+  const [showLocation, setShowLocation] = useState(false);
+  const [showDate, setShowdate] = useState(false);
+  const [showText, setShowText] = useState(false);
 
   const { imageData } = route.params;
 
@@ -37,20 +41,44 @@ const PreviewScreen = ({ onOK, route }) => {
   };
 
   const openDraw = () => {
-    setShowDraw(true);
+    setShowLocation(false);
     setShowRotate(false);
+    setShowDraw(true);
+    setShowdate(false);
+    setShowText(false);
   };
 
   const openRotate = () => {
+    setShowLocation(false);
     setShowRotate(true);
     setShowDraw(false);
+    setShowdate(false);
+    setShowText(false);
   };
 
-  const openLocation = () => { 
+  const openLocation = () => {
     setShowLocation(true);
     setShowRotate(false);
     setShowDraw(false);
+    setShowdate(false);
+    setShowText(false);
   };
+
+  const openDate = () => {
+    setShowLocation(false);
+    setShowRotate(false);
+    setShowDraw(false);
+    setShowdate(true);
+    setShowText(false);
+  };
+
+  const openTextImage = () => {
+    setShowLocation(false);
+    setShowRotate(false);
+    setShowDraw(false);
+    setShowdate(false);
+    setShowText(true);
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -58,37 +86,36 @@ const PreviewScreen = ({ onOK, route }) => {
         showDraw ?
           <DrawCanvas
             url={imageData} />
-          :<View style={styles.mainContainer}>
-          {/* <Image
-          source={{uri:imageData}}
-          style={{
-            height:height-100,
-            width:width
-          }}/> */}
-        </View>
-        }
-          {
-          showRotate ? 
-          <RotateImage
-          url={imageData}/>
-          :
-          <View style={styles.mainContainer}>
-            {/* <Image
-            source={{uri:imageData}}
-            style={{
-              height:height-100,
-              width:width
-            }}/> */}
+          : <View style={styles.mainContainer}>
           </View>
-          }
+      }
       {
-        showLocation ? 
-        <LocationOnImage
-        url={imageData}/>
-        :
-        <View style={styles.mainContainer}>
-           
-          </View>
+        showRotate ?
+          <RotateImage
+            url={imageData} />
+          :
+          null
+      }
+      {
+        showLocation ?
+          <LocationOnImage
+            url={imageData} />
+          :
+          null
+      }
+      {
+        showDate ?
+          <DateOnImage
+            url={imageData} />
+          :
+          null
+      }
+      {
+        showText ?
+          <TextOnImage
+            url={imageData} />
+          :
+          null
       }
       <View style={styles.colorSelectContainer}>
         <ImageCanvas />
@@ -99,13 +126,13 @@ const PreviewScreen = ({ onOK, route }) => {
             onPress={() => openDraw()}>
             <DrawIcon name="draw" size={30} color="#ffff" />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => openTextImage()}>
             <Icon name="text" size={30} color="black" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => openLocation()}>
             <Icon name="ios-location" size={30} color="#32a852" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => openGallery()}>
+          <TouchableOpacity onPress={() => openDate()}>
             <Icon name="calendar" size={30} color="#5de1f0" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => createTwoButtonAlert()}>
@@ -124,7 +151,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: 'lightblue',
-    alignItems: 'center'
+    justifyContent: 'center'
   },
   imagePreview: {
     height: height - 120,

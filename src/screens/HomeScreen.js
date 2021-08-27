@@ -27,12 +27,12 @@ const HomeScreen = ({ navigation }) => {
       const imagePath = image.data;
       const source = "data:image/png;base64," + imagePath;
       setImageUrl(source);
-      console.log(imageUrl);      
+      console.log(imageUrl);
     });
   };
 
-  const gotoPreview =() =>{
-    navigation.navigate('Preview',{imageData:imageUrl})
+  const gotoPreview = () => {
+    navigation.navigate('Preview', { imageData: imageUrl })
   }
 
   return (
@@ -43,12 +43,12 @@ const HomeScreen = ({ navigation }) => {
       <CustomButton
         title="Open Gallery"
         onPress={() => openGallery()} />
-        <CustomButton
+      <CustomButton
         title="Edit Image"
         onPress={() => gotoPreview()} />
       <Image
-        style={{ height:200, width:300,borderRadius:10 }}
-        source={{uri:imageUrl}} />
+        style={{ height: 250, width: 300, borderRadius: 10 }}
+        source={{ uri: imageUrl }} />
     </View>
   );
 };

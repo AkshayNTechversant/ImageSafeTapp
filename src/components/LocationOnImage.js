@@ -5,10 +5,6 @@ import PhotoManipulator from 'react-native-photo-manipulator';
 const LocationOnImage = ({ url, onPress }) => {
     const [imageUrl,setImageUrl] = useState(null);
 
-    useEffect(()=>{
-        imageManipulate();
-    },[]);
-
     const imageManipulate = () => {
         const texts = [
           { position: { x: 10, y: 10 }, text: "ALTITUDE", textSize: 10, color: "#ffff" },
@@ -20,13 +16,14 @@ const LocationOnImage = ({ url, onPress }) => {
         PhotoManipulator.printText(url, texts).then(path => {
           console.log(`Result image path: ${path}`);
           setImageUrl(path);
+          console.log(`Result image path State: ${imageUrl}`);
         });
       };
     return(
        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
            <Image
-           source={{uri:imageUrl}}
-           style={{width:"100%"}}/>
+           source={{uri:"file:///Users/akshayn/Library/Developer/CoreSimulator/Devices/01E44A09-EFB2-4BE3-951B-F9240046508D/data/Containers/Data/Application/88CB037B-2EF5-4EFC-8E48-0D6CC918EF90/Library/Caches/C1D3AF28-4BE2-4B6A-80B7-80B4B7E5C296.jpg"}}
+           style={{width:"100%",height:'90%'}}/>
            <Button
            title="Press"
            onPress={()=>imageManipulate()}

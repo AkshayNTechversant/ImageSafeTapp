@@ -5,6 +5,8 @@ import Camera from '../screens/Camera';
 import PreviewScreen from '../screens/PreviewScreen';
 import ImageCanvas from '../screens/ImageCanvas';
 import WorkSpace from '../screens/Workspace';
+import CompleteImage from '../screens/CompleteImage';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +18,7 @@ const MainStack = () =>{
         <Stack.Screen name="Preview" component={PreviewScreen} />
         <Stack.Screen name="ImageCanvas" component={ImageCanvas} />
         <Stack.Screen name="Workspace" component={WorkSpace} />
+        <Stack.Screen name="CompleteImage" component={CompleteImage} />
        </Stack.Navigator>
     );
 };

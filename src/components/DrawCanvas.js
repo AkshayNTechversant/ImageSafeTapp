@@ -4,7 +4,7 @@ import SignatureScreen from "react-native-signature-canvas";
 
 const { width, height } = Dimensions.get('window');
 
-const DrawCanvas = ({ url, onPress }) => {
+const DrawCanvas = ({ url, onPress ,navigation}) => {
     const imgWidth = width;
     const imgHeight = height / 1.38;
     const ref = useRef();
@@ -42,6 +42,10 @@ const DrawCanvas = ({ url, onPress }) => {
                 />
             </View>
             <View style={styles.row}>
+            <Button
+                    title="Clear"
+                    onPress={handleClear}
+                />
                 <Button
                     title="Confirm"
                     onPress={handleConfirm}
