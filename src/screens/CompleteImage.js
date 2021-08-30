@@ -1,13 +1,21 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View , Image, StyleSheet } from 'react-native';
+import { useState } from 'react/cjs/react.development';
 
 const CompleteImage = ({route}) => {
+   const {ImageUrl} = route.params;
+   
+   const [image,setImage] = useState(null)
+   useEffect(()=>{
+    setImage(ImageUrl);
+    console.log("Complete Image",image);
+   },[image]);
    
     return(
         <View style={styles.mainContainer}>
             <Image
-            source={{uri:'https://atlas-network.com/wp-content/uploads/2019/03/Big-Data-blog1-16.9-1.jpg'}}
+            source={{uri:image}}
             style={styles.imageStyle}/>
 
         </View>

@@ -4,12 +4,15 @@ import SignatureScreen from "react-native-signature-canvas";
 
 const { width, height } = Dimensions.get('window');
 
-const DrawCanvas = ({ url, onPress ,navigation}) => {
+const DrawCanvas = ({ url, onPress, parentImage , undo }) => {
     const imgWidth = width;
-    const imgHeight = height / 1.38;
+    const imgHeight = height / 1.39;
     const ref = useRef();
     const [signature, setSign] = useState(null);
+    
+    useEffect(() => {
 
+    }, []);
     const handleSignature = (signature) => {
         console.log(signature);
         setSign(signature);
@@ -24,33 +27,58 @@ const DrawCanvas = ({ url, onPress ,navigation}) => {
         ref.current.readSignature();
     }
 
+    const saveAllChanges = () => {
+        const newValue = signature;
+        setSaveAll(newValue);
+        parentImage(newValue);
+    };
+    const undoImage = () => {
+     const value = "null";
+     setSign(value); 
+     undo(value);
+    ;}
+
     const style = `.m-signature-pad {box-shadow: none; border: none; } 
               .m-signature-pad--body {border: none;}
               .m-signature-pad--footer {display: none; margin: 0px;}
               body,html {
               width: ${imgWidth}px; height: ${imgHeight}px;}`;
     return (
-        <View>
-            <View style={{ width: imgWidth, height: imgHeight }}>
-                <SignatureScreen
-                    ref={ref}
-                    dataURL={url}
-                    overlayWidth={imgWidth}
-                    overlayHeight={imgHeight}
-                    webStyle={style}
-                    onOK={handleSignature}
-                />
-            </View>
-            <View style={styles.row}>
-            <Button
-                    title="Clear"
-                    onPress={handleClear}
-                />
-                <Button
-                    title="Confirm"
-                    onPress={handleConfirm}
-                />
-            </View>
+        <View style={styles.mainContainer}>
+            {signature !== null ?
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={{ uri: signature }}
+                        style={{
+                            height: height - 200,
+                            width: width
+                        }} />
+                </View>
+                : 
+                <View style={styles.mainContainer}>
+                    <View style={{ width: imgWidth, height: imgHeight }}>
+                        <SignatureScreen
+                            ref={ref}
+                            dataURL={url}
+                            overlayWidth={imgWidth}
+                            overlayHeight={imgHeight}
+                            webStyle={style}
+                            onOK={handleSignature}
+                        />
+                    </View>
+                    <View style={styles.row}>
+                        <Button
+                            title="Clear"
+                            onPress={handleClear}
+                        />
+                        <Button
+                            title="Confirm"
+                            onPress={handleConfirm}
+                        />
+                    </View>
+                </View>
+            }
+
         </View>
     );
 };
@@ -62,12 +90,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     row: {
-        display: "flex",
         flexDirection: "row",
         justifyContent: 'center',
-        width: '100%',
+        width:width,
         alignItems: 'center',
     },
+    imageContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });
 
 export default DrawCanvas;

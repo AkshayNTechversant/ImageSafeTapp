@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, PermissionsAndroid, Image, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomButton from '../components/CustomButton';
@@ -16,7 +16,9 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate('Workspace');
 
   };
-
+  useEffect(() => {
+    console.log("Home", imageUrl)
+  }, [imageUrl]);
 
   const openGallery = () => {
     ImagePicker.openPicker({

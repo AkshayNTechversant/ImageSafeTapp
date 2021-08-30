@@ -4,7 +4,6 @@ import DrawIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PhotoManipulator from 'react-native-photo-manipulator';
 import ImageCanvas from './ImageCanvas';
-import ImagePicker from 'react-native-image-crop-picker';
 import DrawCanvas from '../components/DrawCanvas';
 import RotateImage from '../components/RotateImage';
 import LocationOnImage from '../components/LocationOnImage';
@@ -15,16 +14,22 @@ import TextOnImage from '../components/TextOnImage';
 const { width, height } = Dimensions.get('window');
 
 
-const PreviewScreen = ({ onOK, route }) => {
+const PreviewScreen = ({ onOK, route, navigation }) => {
 
   const [showDraw, setShowDraw] = useState(false);
   const [showRotate, setShowRotate] = useState(false);
   const [showLocation, setShowLocation] = useState(false);
   const [showDate, setShowdate] = useState(false);
   const [showText, setShowText] = useState(false);
+  const [imageUrl, setImageUrl] = useState(null);
+
 
   const { imageData } = route.params;
 
+  useEffect(() => {
+    setImageUrl(imageData);
+    console.log("From Home", imageUrl)
+  }, [imageUrl]);
 
   const imageManipulate = () => {
     const texts = [
@@ -36,7 +41,7 @@ const PreviewScreen = ({ onOK, route }) => {
 
     PhotoManipulator.printText(imageData, texts).then(path => {
       console.log(`Result image path: ${path}`);
-      setImageUrl(path);
+
     });
   };
 
@@ -78,6 +83,15 @@ const PreviewScreen = ({ onOK, route }) => {
     setShowDraw(false);
     setShowdate(false);
     setShowText(true);
+  };
+
+  const showDrawImage = (saveAll) => {
+    const data = saveAll;
+  }
+
+  const showRotateImage = (saveAll) => {
+    console.log("RotateImage", saveAll);
+    const data = saveAll;
   }
 
   return (
@@ -85,14 +99,19 @@ const PreviewScreen = ({ onOK, route }) => {
       {
         showDraw ?
           <DrawCanvas
-            url={imageData} />
+            url={imageData}
+            parentImage={showDrawImage} />
           : <View style={styles.mainContainer}>
           </View>
       }
       {
         showRotate ?
+        <View style={styles.mainContainer1}>
           <RotateImage
-            url={imageData} />
+            url={imageData} 
+            parentImage={showRotateImage}/>
+          </View>
+          
           :
           null
       }
@@ -152,6 +171,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'lightblue',
     justifyContent: 'center'
+  },
+  mainContainer1: {
+    flex:11,
+    
   },
   imagePreview: {
     height: height - 120,
