@@ -3,7 +3,7 @@ import { View , StyleSheet} from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { useCamera } from 'react-native-camera-hooks';
 import RNFS from 'react-native-fs';
-import CustomButton from '../components/CustomButton';
+import CustomButton from './CustomButton';
 
 const Camera = ({navigation}) => {
 

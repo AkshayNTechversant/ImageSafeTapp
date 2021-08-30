@@ -3,49 +3,48 @@ import { StyleSheet, View, Dimensions, Button, TouchableOpacity, Image } from 'r
 import PhotoManipulator from 'react-native-photo-manipulator';
 
 const LocationOnImage = ({ url, onPress }) => {
-    const [imageUrl,setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
-    const imageManipulate = () => {
-        const texts = [
-          { position: { x: 10, y: 10 }, text: "ALTITUDE", textSize: 10, color: "#ffff" },
-          { position: { x: 20, y: 180 }, text: "677m", textSize: 10, color: "#ffff" },
-          { position: { x: 190, y: 170 }, text: "-5386422 °N", textSize: 10, color: "#ffff" },
-          { position: { x: 190, y: 180 }, text: "-1133196 °W", textSize: 10, color: "#ffff" }
-        ];
-    
-        PhotoManipulator.printText(url, texts).then(path => {
-          console.log(`Result image path: ${path}`);
-          setImageUrl(path);
-          console.log(`Result image path State: ${imageUrl}`);
-        });
-      };
-    return(
-       <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-           <Image
-           source={{uri:"file:///Users/akshayn/Library/Developer/CoreSimulator/Devices/01E44A09-EFB2-4BE3-951B-F9240046508D/data/Containers/Data/Application/88CB037B-2EF5-4EFC-8E48-0D6CC918EF90/Library/Caches/C1D3AF28-4BE2-4B6A-80B7-80B4B7E5C296.jpg"}}
-           style={{width:"100%",height:'90%'}}/>
-           <Button
-           title="Press"
-           onPress={()=>imageManipulate()}
-           />
-           </View>
-    );
+  const imageManipulate = () => {
+    const texts = [
+      { position: { x: 80, y: 10 }, text: "ALTITUDE", textSize: 10, color: "#ffff" },
+      { position: { x: 80, y: 180 }, text: "677m", textSize: 10, color: "#ffff" },
+      { position: { x: 190, y: 170 }, text: "-5386422 °N", textSize: 10, color: "#ffff" },
+      { position: { x: 190, y: 180 }, text: "-1133196 °W", textSize: 10, color: "#ffff" }
+    ];
+
+    PhotoManipulator.printText(url, texts).then(path => {
+      console.log(`Result image path: ${path}`);
+      setImageUrl(path);
+    });
+  };
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Image
+        source={{ uri:imageUrl}}
+        style={{ width: "100%", height: '90%' }} />
+      <Button
+        title="Press"
+        onPress={() => imageManipulate()}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    button:{
-        height:60,
-        width:"80%",
-        backgroundColor:'grey',
-        justifyContent:'center',
-        alignItems:'center',
-        borderRadius:10,
-        margin:10
-    },
-    textStyle:{
-        color:"#fff",
-        fontWeight:'bold'
-    }
+  button: {
+    height: 60,
+    width: "80%",
+    backgroundColor: 'grey',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    margin: 10
+  },
+  textStyle: {
+    color: "#fff",
+    fontWeight: 'bold'
+  }
 });
 
 export default LocationOnImage;
