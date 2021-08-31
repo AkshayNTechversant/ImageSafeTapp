@@ -1,21 +1,21 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect,useContext } from 'react';
 import { View, Image, StyleSheet, Dimensions, TouchableOpacity, Button, PermissionsAndroid, Alert } from 'react-native';
 import SignatureScreen from "react-native-signature-canvas";
-
+import { ImageContext } from '../context/ImageProcessing/ImageContext';
 const { width, height } = Dimensions.get('window');
 
-const DrawCanvas = ({ url, onPress, parentImage , undo }) => {
+const DrawCanvas = ({ url, onPress, parentImage, undo }) => {
     const imgWidth = width;
     const imgHeight = height / 1.39;
     const ref = useRef();
     const [signature, setSign] = useState(null);
-    
-    useEffect(() => {
 
-    }, []);
+    const { image, updateImage } = useContext(ImageContext);
+    
+
     const handleSignature = (signature) => {
         console.log(signature);
-        setSign(signature);
+        updateImage(signature);
     };
 
     const handleClear = () => {
@@ -33,10 +33,11 @@ const DrawCanvas = ({ url, onPress, parentImage , undo }) => {
         parentImage(newValue);
     };
     const undoImage = () => {
-     const value = "null";
-     setSign(value); 
-     undo(value);
-    ;}
+        const value = "null";
+        setSign(value);
+        undo(value);
+        ;
+    }
 
     const style = `.m-signature-pad {box-shadow: none; border: none; } 
               .m-signature-pad--body {border: none;}
@@ -45,16 +46,7 @@ const DrawCanvas = ({ url, onPress, parentImage , undo }) => {
               width: ${imgWidth}px; height: ${imgHeight}px;}`;
     return (
         <View style={styles.mainContainer}>
-            {signature !== null ?
-                <View style={styles.imageContainer}>
-                    <Image
-                        source={{ uri: signature }}
-                        style={{
-                            height: height - 200,
-                            width: width
-                        }} />
-                </View>
-                : 
+           
                 <View style={styles.mainContainer}>
                     <View style={{ width: imgWidth, height: imgHeight }}>
                         <SignatureScreen
@@ -77,7 +69,7 @@ const DrawCanvas = ({ url, onPress, parentImage , undo }) => {
                         />
                     </View>
                 </View>
-            }
+            
 
         </View>
     );
@@ -92,7 +84,7 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: "row",
         justifyContent: 'center',
-        width:width,
+        width: width,
         alignItems: 'center',
     },
     imageContainer: {

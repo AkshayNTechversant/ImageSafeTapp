@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useContext} from 'react';
 import { StyleSheet, View, Dimensions, Button, TouchableOpacity, Image } from 'react-native';
 import PhotoManipulator from 'react-native-photo-manipulator';
+import { ImageContext } from '../context/ImageProcessing/ImageContext';
 
 const WorkSpace = ({ onPress }) => {
-  const [imageUrl, setImageUrl] = useState("file:///Users/akshayn/Library/Developer/CoreSimulator/Devices/01E44A09-EFB2-4BE3-951B-F9240046508D/data/Containers/Data/Application/D291455A-91EF-42C1-A637-6C23644AB562/Library/Caches/2759CD1B-648F-41BC-AA41-1B17DD67C041.jpg");
+  const { image, updateImage } = useContext(ImageContext);
 
   const imageManipulate = () => {
     const texts = [
@@ -27,7 +28,7 @@ const WorkSpace = ({ onPress }) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Image
-        source={{ uri: "file:///Users/akshayn/Library/Developer/CoreSimulator/Devices/01E44A09-EFB2-4BE3-951B-F9240046508D/data/Containers/Data/Application/D291455A-91EF-42C1-A637-6C23644AB562/Library/Caches/A55D2D60-670D-4C11-A810-0EDDA9F00AB1.jpg" }}
+        source={{ uri:image }}
         style={{ width: "100%", height: '90%' }} />
       <Button
         title="Press"

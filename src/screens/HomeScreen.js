@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Dimensions, PermissionsAndroid, Image, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomButton from '../components/CustomButton';
 import ImagePicker from 'react-native-image-crop-picker';
+import { ImageContext } from '../context/ImageProcessing/ImageContext';
 
 
 const { width, height } = Dimensions.get('window');
 
 const HomeScreen = ({ navigation }) => {
 
-  const [imageUrl, setImageUrl] = useState(null);
-  const [base64Array, setBase64Array] = useState('');
-
+  const { image ,updateImage } = useContext(ImageContext);
+  console.log("ImageContext",image)
+  
   const openCamera = () => {
     navigation.navigate('Workspace');
-
   };
-  useEffect(() => {
-    console.log("Home", imageUrl)
-  }, [imageUrl]);
 
   const openGallery = () => {
     ImagePicker.openPicker({
@@ -28,13 +25,13 @@ const HomeScreen = ({ navigation }) => {
     }).then(image => {
       const imagePath = image.data;
       const source = "data:image/png;base64," + imagePath;
-      setImageUrl(source);
-      console.log(imageUrl);
+      updateImage(source);
+      gotoPreview();
     });
   };
 
   const gotoPreview = () => {
-    navigation.navigate('Preview', { imageData: imageUrl })
+    navigation.navigate('Preview');
   }
 
   return (
@@ -45,12 +42,6 @@ const HomeScreen = ({ navigation }) => {
       <CustomButton
         title="Open Gallery"
         onPress={() => openGallery()} />
-      <CustomButton
-        title="Edit Image"
-        onPress={() => gotoPreview()} />
-      <Image
-        style={{ height: 250, width: 300, borderRadius: 10 }}
-        source={{ uri: imageUrl }} />
     </View>
   );
 };

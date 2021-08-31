@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect ,useContext} from 'react';
 import { View, Image, StyleSheet, Dimensions, TouchableOpacity, Button, PermissionsAndroid, Alert } from 'react-native';
 import DrawIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -9,6 +9,7 @@ import RotateImage from '../components/RotateImage';
 import LocationOnImage from '../components/LocationOnImage';
 import DateOnImage from '../components/DateOnImage';
 import TextOnImage from '../components/TextOnImage';
+import { ImageContext } from '../context/ImageProcessing/ImageContext';
 
 
 const { width, height } = Dimensions.get('window');
@@ -21,15 +22,9 @@ const PreviewScreen = ({ onOK, route, navigation }) => {
   const [showLocation, setShowLocation] = useState(false);
   const [showDate, setShowdate] = useState(false);
   const [showText, setShowText] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
 
-
-  const { imageData } = route.params;
-
-  useEffect(() => {
-    setImageUrl(imageData);
-    console.log("From Home", imageUrl)
-  }, [imageUrl]);
+  const { image ,updateImage } = useContext(ImageContext);
+  console.log("ImageContext",image);
 
   const imageManipulate = () => {
     const texts = [
@@ -99,7 +94,7 @@ const PreviewScreen = ({ onOK, route, navigation }) => {
       {
         showDraw ?
           <DrawCanvas
-            url={imageData}
+            url={image}
             parentImage={showDrawImage} />
           : <View style={styles.mainContainer}>
           </View>
@@ -108,7 +103,7 @@ const PreviewScreen = ({ onOK, route, navigation }) => {
         showRotate ?
         <View style={styles.mainContainer1}>
           <RotateImage
-            url={imageData} 
+            url={image} 
             parentImage={showRotateImage}/>
           </View>
           
@@ -118,21 +113,21 @@ const PreviewScreen = ({ onOK, route, navigation }) => {
       {
         showLocation ?
           <LocationOnImage
-            url={imageData} />
+            url={image} />
           :
           null
       }
       {
         showDate ?
           <DateOnImage
-            url={imageData} />
+            url={image} />
           :
           null
       }
       {
         showText ?
           <TextOnImage
-            url={imageData} />
+            url={image} />
           :
           null
       }
