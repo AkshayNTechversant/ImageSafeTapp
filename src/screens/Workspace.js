@@ -16,20 +16,20 @@ const WorkSpace = ({ onPress }) => {
     const cropRegion = { x: 5, y: 30, height: 400, width: 250 };
     const targetSize = { size: 200, width: 150 };
 
-    PhotoManipulator.crop(imageUrl, cropRegion, targetSize).then(path => {
-      console.log(`Result image path crop: ${path}`);
-    });
-
-    // PhotoManipulator.printText(imageUrl, texts).then(path => {
-    //   console.log(`Result image path: ${path}`);
-    //   setImageUrl(path);
+    // PhotoManipulator.crop(image, cropRegion, targetSize).then(path => {
+    //   updateImage(path)
     // });
+
+    PhotoManipulator.printText(image, texts).then(path => {
+      console.log(`Result image path: ${path}`);
+     updateImage(path)
+    });
   };
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Image
         source={{ uri:image }}
-        style={{ width: "100%", height: '90%' }} />
+        style={{ width: "100%", height: '80%' }} />
       <Button
         title="Press"
         onPress={() => imageManipulate()}

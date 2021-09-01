@@ -51,7 +51,7 @@ const DrawCanvas = ({ url, onPress, parentImage, undo }) => {
                     <View style={{ width: imgWidth, height: imgHeight }}>
                         <SignatureScreen
                             ref={ref}
-                            dataURL={url}
+                            dataURL={image}
                             overlayWidth={imgWidth}
                             overlayHeight={imgHeight}
                             webStyle={style}

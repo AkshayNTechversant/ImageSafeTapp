@@ -25,7 +25,7 @@ const ImageCanvas = ({ }) => {
     }
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.colorPelletRed} onPress={() => imageManipulate()}></TouchableOpacity>
+            <TouchableOpacity style={styles.colorPelletRed}></TouchableOpacity>
             <TouchableOpacity style={styles.colorPelletYellow}></TouchableOpacity>
             <TouchableOpacity style={styles.colorPelletGreen}></TouchableOpacity>
             <TouchableOpacity style={styles.colorPelletBlue}></TouchableOpacity>

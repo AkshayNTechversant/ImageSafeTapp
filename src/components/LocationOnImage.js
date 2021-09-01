@@ -1,30 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, View, Dimensions, Button, TouchableOpacity, Image } from 'react-native';
 import PhotoManipulator from 'react-native-photo-manipulator';
+import { ImageContext } from '../context/ImageProcessing/ImageContext';
 
 const LocationOnImage = ({ url, onPress }) => {
-  const [imageUrl, setImageUrl] = useState(null);
+  const { image, updateImage } = useContext(ImageContext);
+
+  useEffect(() => {
+    
+    
+  }, []);
 
   const imageManipulate = () => {
     const texts = [
-      { position: { x: 80, y: 10 }, text: "ALTITUDE", textSize: 10, color: "#ffff" },
-      { position: { x: 80, y: 180 }, text: "677m", textSize: 10, color: "#ffff" },
-      { position: { x: 190, y: 170 }, text: "-5386422 °N", textSize: 10, color: "#ffff" },
-      { position: { x: 190, y: 180 }, text: "-1133196 °W", textSize: 10, color: "#ffff" }
+      { position: { x: 50, y: 1650 }, text: "ALTITUDE", textSize: 40, color: "white", thickness:8 },
+      { position: { x: 90, y: 1700 }, text: "677m", textSize: 40, color: "white", thickness: 8 },
+      { position: { x: 900, y: 1650 }, text: "-5386422 °N", textSize: 40, color: "white", thickness: 8 },
+      { position: { x: 900, y: 1700 }, text: "-1133196 °W", textSize: 40, color: "white", thickness: 8 }
     ];
 
-    PhotoManipulator.printText(url, texts).then(path => {
+    PhotoManipulator.printText(image, texts).then(path => {
       console.log(`Result image path: ${path}`);
-      setImageUrl(path);
+      updateImage(path)
     });
   };
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 10, justifyContent: 'center', alignItems: 'center' }}>
       <Image
-        source={{ uri:imageUrl}}
+        source={{ uri: image }}
         style={{ width: "100%", height: '90%' }} />
       <Button
-        title="Press"
+        title="Add location"
         onPress={() => imageManipulate()}
       />
     </View>

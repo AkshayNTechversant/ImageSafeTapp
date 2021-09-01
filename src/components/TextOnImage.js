@@ -1,17 +1,18 @@
-import React, { Component } from "react";
+import React, { Component ,useContext} from "react";
 import { Dimensions, View, Image, ImageBackground } from "react-native";
 import { DragTextEditor } from 'react-native-drag-text-editor';
+import { ImageContext } from '../context/ImageProcessing/ImageContext';
 const WINDOW = Dimensions.get('window');
 
 const TextOnImage = (url) => {
-
+    const { image, updateImage } = useContext(ImageContext);
     return (
         <View style={{
             height: "85%",
             width: "100%"
         }}>
             <Image
-                source={{ uri: "file:///Users/akshayn/Library/Developer/CoreSimulator/Devices/01E44A09-EFB2-4BE3-951B-F9240046508D/data/Containers/Data/Application/D291455A-91EF-42C1-A637-6C23644AB562/Library/Caches/C55A79C3-C8E9-497E-BDEC-619975B8A896.jpg" }}
+                source={{ uri: image }}
                 style={{ width: "100%", height: "95%" }} />
             <DragTextEditor
                 minWidth={100}
