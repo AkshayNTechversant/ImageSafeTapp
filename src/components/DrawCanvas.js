@@ -4,7 +4,7 @@ import SignatureScreen from "react-native-signature-canvas";
 import { ImageContext } from '../context/ImageProcessing/ImageContext';
 const { width, height } = Dimensions.get('window');
 
-const DrawCanvas = ({ url, onPress, parentImage, undo }) => {
+const DrawCanvas = ({ url, onPress, parentImage }) => {
     const imgWidth = width;
     const imgHeight = height / 1.39;
     const ref = useRef();
@@ -32,12 +32,7 @@ const DrawCanvas = ({ url, onPress, parentImage, undo }) => {
         setSaveAll(newValue);
         parentImage(newValue);
     };
-    const undoImage = () => {
-        const value = "null";
-        setSign(value);
-        undo(value);
-        ;
-    }
+   
 
     const style = `.m-signature-pad {box-shadow: none; border: none; } 
               .m-signature-pad--body {border: none;}

@@ -24,22 +24,7 @@ const PreviewScreen = ({ onOK, route, navigation }) => {
   const [showText, setShowText] = useState(false);
 
   const { image ,updateImage } = useContext(ImageContext);
-  console.log("ImageContext",image);
-
-  const imageManipulate = () => {
-    const texts = [
-      { position: { x: 10, y: 100 }, text: "ALTITUDE", textSize: 10, color: "#ffff" },
-      { position: { x: 20, y: 180 }, text: "677m", textSize: 10, color: "#ffff" },
-      { position: { x: 190, y: 170 }, text: "-5386422 °N", textSize: 10, color: "#ffff" },
-      { position: { x: 190, y: 180 }, text: "-1133196 °W", textSize: 10, color: "#ffff" }
-    ];
-
-    PhotoManipulator.printText(imageData, texts).then(path => {
-      console.log(`Result image path: ${path}`);
-
-    });
-  };
-
+ 
   const openDraw = () => {
     setShowLocation(false);
     setShowRotate(false);
@@ -149,7 +134,7 @@ const PreviewScreen = ({ onOK, route, navigation }) => {
           <TouchableOpacity onPress={() => openDate()}>
             <Icon name="calendar" size={30} color="#5de1f0" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => createTwoButtonAlert()}>
+          <TouchableOpacity onPress={() => undo()}>
             <DrawIcon name="undo" size={30} color="#f0df5d" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => openRotate()}>
