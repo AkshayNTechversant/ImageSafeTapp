@@ -24,6 +24,7 @@ const PreviewScreen = ({ onOK, route, navigation }) => {
   const [showText, setShowText] = useState(false);
 
   const { image ,updateImage } = useContext(ImageContext);
+  console.log("Image",image.id)
  
   const openDraw = () => {
     setShowLocation(false);
@@ -79,7 +80,7 @@ const PreviewScreen = ({ onOK, route, navigation }) => {
       {
         showDraw ?
           <DrawCanvas
-            url={image}
+            url={image.source}
             parentImage={showDrawImage} />
           : <View style={styles.mainContainer}>
           </View>

@@ -4,35 +4,50 @@ import { createContext } from "react";
 
 export const ImageContext = createContext();
 
+const useHistory = (initialState) => {
+    const [index, setIndex] = useState(0)
+    const [history, setHistory] = useState([initialState]);
+
+    const setState = (action,overWrite=false) => {
+        const newState = typeof action === "function" ? action(history[index]) : action;
+
+        if(overWrite){
+            const historyCopy = [...history];
+            historyCopy[index] = newState;
+            setHistory(historyCopy);
+        }
+        else{
+            setHistory(prevState => [...prevState, newState]);
+            setIndex(prevState => prevState + 1);
+        }      
+    };
+
+    const undo = () => index > 0 && setIndex(prevState => prevState - 1);
+    const redo = () => index < history.length - 1 && setIndex(prevState => prevState + 1);
+    return [ history[index], setState, undo , redo ];
+};
+
 const ImageProcessing = ({ children }) => {
 
     const [image, setImage] = useState(null);
-    const [present , setPresent ] = useState(null);
-    const [past,setPast] = useState([]);
-    const [future,setFuture] = useState([]);
+    // const [elements, setElements ,undo , redo ] = useHistory([]);
+    const createElement = (id,value) => {
+        return{id,value}
+    }
+    const pushElements = (id,value) => {
+       const updateElement = createElement(id,value);
+       const elementCopy = [...elements];
+        elementCopy[id] = updateElement;
+        setElements(elementCopy);
+    };
     
-
-    const updateState = (value) => {
-        setPast(image);
-        setPresent(value);
-        console.log("Data",value);
-    };
-
-    const undo = () => {
-        future.push(present);
-        setPresent(past.pop());
-        console.log("Data",present);
-    };
-
-   
 
     const updateImage = (source) => {
         setImage(source);
-        setPresent(source);
-    }
+    };
 
     return (
-        <ImageContext.Provider value={{ image, updateImage ,updateState , undo }}>
+        <ImageContext.Provider value={{ image, updateImage }}>
             {children}
         </ImageContext.Provider>
     );
