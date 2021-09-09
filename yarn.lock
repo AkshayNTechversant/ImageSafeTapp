@@ -1719,6 +1719,13 @@
   dependencies:
     "eslint-visitor-keys" "^1.1.0"
 
+"@wanmi/react-native-view-shot@^1.0.0":
+  "integrity" "sha512-02HIYnfXe8hMZY2NIb9/3dowcUTPJ2nz6Vd7VnsIndd51V+U2BGgB+iJCfBEmCppIvNzfrFBGTG5amfdpgDKfQ=="
+  "resolved" "https://registry.npmjs.org/@wanmi/react-native-view-shot/-/react-native-view-shot-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "user" "0.0.0"
+
 "abab@^2.0.3", "abab@^2.0.5":
   "integrity" "sha512-9IK9EadsbHo6jLWIpxpR6pL0sazTXV6+SQv25ZB+F7Bj9mJNaOc4nCRabwd5M/JwmUa8idz6Eci6eKfJryPs6Q=="
   "resolved" "https://registry.npmjs.org/abab/-/abab-2.0.5.tgz"
@@ -7169,6 +7176,11 @@
   "integrity" "sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ=="
   "resolved" "https://registry.npmjs.org/use/-/use-3.1.1.tgz"
   "version" "3.1.1"
+
+"user@0.0.0":
+  "integrity" "sha1-8n8bI/xRHyqO+kDbVc+6Ejgk4Co="
+  "resolved" "https://registry.npmjs.org/user/-/user-0.0.0.tgz"
+  "version" "0.0.0"
 
 "username@^5.1.0":
   "integrity" "sha512-PCKbdWw85JsYMvmCv5GH3kXmM66rCd9m1hBEDutPNv94b/pqCMT4NtcKyeWYvLFiE8b+ha1Jdl8XAaUdPn5QTg=="

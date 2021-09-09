@@ -371,6 +371,8 @@ PODS:
     - React-RCTImage
   - RNVectorIcons (8.1.0):
     - React-Core
+  - RNViewShot (1.0.0):
+    - React
   - TOCropViewController (2.5.3)
   - WCPhotoManipulator (2.0.4)
   - Yoga (1.14.0)
@@ -439,6 +441,7 @@ DEPENDENCIES:
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - "RNViewShot (from `../node_modules/@wanmi/react-native-view-shot`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -538,6 +541,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  RNViewShot:
+    :path: "../node_modules/@wanmi/react-native-view-shot"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -594,6 +599,7 @@ SPEC CHECKSUMS:
   RNImageCropPicker: 35a3ceb837446fa11547704709bb22b5fac6d584
   RNScreens: 01ab149b5dd5c27f5ff26741b1d2bdf2cee1af35
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
+  RNViewShot: a8a096f18f3515b82620b6372bcbf43af67163d2
   TOCropViewController: 20a14b6a7a098308bf369e7c8d700dc983a974e6
   WCPhotoManipulator: 45b7be19b75c9edf6d2b44f2f61dbc3673862a8f
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4

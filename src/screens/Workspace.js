@@ -1,57 +1,63 @@
-import React, { useEffect, useState , useContext} from 'react';
-import { StyleSheet, View, Dimensions, Button, TouchableOpacity, Image } from 'react-native';
-import PhotoManipulator from 'react-native-photo-manipulator';
-import { ImageContext } from '../context/ImageProcessing/ImageContext';
+import React from 'react';
+import { StyleSheet, Text, View, ImageBackground, SafeAreaView, TouchableOpacity, Button, Share } from 'react-native';
+import ViewShot from "@wanmi/react-native-view-shot";
+import { useRef } from 'react';
 
-const WorkSpace = ({ onPress }) => {
-  const { image, updateImage } = useContext(ImageContext);
 
-  const imageManipulate = () => {
-    const texts = [
-      { position: { x: 80, y: 10 }, text: "ALTITUDE", textSize: 10, color: "#ffff" },
-      { position: { x: 80, y: 180 }, text: "677m", textSize: 10, color: "#ffff" },
-      { position: { x: 190, y: 170 }, text: "-5386422 °N", textSize: 10, color: "#ffff" },
-      { position: { x: 190, y: 180 }, text: "-1133196 °W", textSize: 10, color: "#ffff" }
-    ];
-    const cropRegion = { x: 5, y: 30, height: 400, width: 250 };
-    const targetSize = { size: 200, width: 150 };
+const WorkSpace = () => {
+    const viewShotRef = useRef();
+    const captureViewShot = async () => {
+        const ImageUrl = await viewShotRef.current.capture();
+        Share.share({title:"Image",url:ImageUrl});
+    }
+    const captureScreenShot = () => {
+        captureRef(viewShotRef, {
+            format: "jpg",
+            quality: 1.0
+          })
+          .then(
+            uri => console.log("Image saved to", uri),
+            error => console.error("Oops, snapshot failed", error)
+          );
+    }
+    return (
+        <SafeAreaView style={styles.mainContainer}>
+            <ViewShot ref={viewShotRef} style={{flex:1}} options={{format:'jpg',quality:1.0,result:'data-uri'}}>
+                <ImageBackground
+                    source={{ uri: "https://i.pinimg.com/736x/7e/1c/0b/7e1c0b3223789770299bc3b66b2fc2a0.jpg" }}
+                    style={{ height: "100%", width: "100%", justifyContent: 'center', alignItems: 'center' }}>
+                    <TouchableOpacity>
+                        <Text style={styles.textStyle}>Take ScreenShot</Text>
+                    </TouchableOpacity>
+                </ImageBackground>
+            </ViewShot>
 
-    // PhotoManipulator.crop(image, cropRegion, targetSize).then(path => {
-    //   updateImage(path)
-    // });
+            <View style={{
+                justifyContent: 'space-between',
+                flexDirection: "row"
+            }}>
+                <Button
+                    title="View Shot"
+                    onPress={() => captureViewShot()} />
+                <Button
+                    title="Screen Shot"
+                    onPress={() => captureScreenShot()} />
+            </View>
 
-    PhotoManipulator.printText(image, texts).then(path => {
-      console.log(`Result image path: ${path}`);
-     updateImage(path)
-    });
-  };
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Image
-        source={{ uri:image }}
-        style={{ width: "100%", height: '80%' }} />
-      <Button
-        title="Press"
-        onPress={() => imageManipulate()}
-      />
-    </View>
-  );
+        </SafeAreaView>
+    );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    height: 60,
-    width: "80%",
-    backgroundColor: 'grey',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    margin: 10
-  },
-  textStyle: {
-    color: "#fff",
-    fontWeight: 'bold'
-  }
+    mainContainer: {
+        flex: 1,
+        backgroundColor: 'transparent',     
+    },
+    textStyle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#fff'
+    }
 });
 
 export default WorkSpace;

@@ -10,12 +10,14 @@ const DrawCanvas = ({ url, onPress, parentImage }) => {
     const ref = useRef();
     const [signature, setSign] = useState(null);
 
-    const { image, updateImage } = useContext(ImageContext);
+    const { image, updateImage , pushElements ,elements} = useContext(ImageContext);
     
 
     const handleSignature = (signature) => {
         console.log(signature);
         updateImage(signature);
+        pushElements(signature);
+        console.log("Elements",elements)
     };
 
     const handleClear = () => {

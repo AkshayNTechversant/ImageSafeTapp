@@ -30,7 +30,7 @@ const useHistory = (initialState) => {
 const ImageProcessing = ({ children }) => {
 
     const [image, setImage] = useState(null);
-    // const [elements, setElements ,undo , redo ] = useHistory([]);
+    const [elements, setElements ,undo , redo ] = useHistory([]);
     const createElement = (id,value) => {
         return{id,value}
     }
@@ -41,13 +41,12 @@ const ImageProcessing = ({ children }) => {
         setElements(elementCopy);
     };
     
-
     const updateImage = (source) => {
         setImage(source);
     };
 
     return (
-        <ImageContext.Provider value={{ image, updateImage }}>
+        <ImageContext.Provider value={{ image, updateImage,pushElements ,elements}}>
             {children}
         </ImageContext.Provider>
     );
